@@ -1,11 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
 
-function App() {
-  const init: string = 'initial';
+import SideBar from './components/SideBar/SideBar';
+import MainLayout from './components/MainLayout/MainLayout';
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+const App = () => {
+
   return (
-    <div >
-      {init}
-    </div>
+    <Wrapper>
+      <SideBar />
+      <MainLayout />
+    </Wrapper>
   );
 }
 
