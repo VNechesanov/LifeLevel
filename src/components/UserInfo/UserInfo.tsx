@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { colors } from '../../utils/theme';
+
+type UserType = {
+    userScore: number,
+    name: string,
+    surname: string,
+}
 
 const Container = styled.div`
     display: flex;
@@ -42,13 +48,20 @@ type Props = {
 
 const UserInfo = (props: Props) => {
     const { userName, userScore, userPhoto } = props;
+    const [initialData, setInitialData] = useState({ userScore: 0, name: '', surname:''} as UserType)
+
+    useEffect(() => {
+        fetch('/userInfo').then(
+            response => response.json()
+        ).then(data => setInitialData(data))
+    },[])
 
     return (
         <Container>
             <Photo>{userPhoto}</Photo>
             <Wrapper>
-                <UserName>{userName}</UserName>
-                <Score>{userScore}</Score>
+                <UserName>{initialData.name}{initialData.surname}</UserName>
+                <Score>{initialData.userScore}</Score>
             </Wrapper>
         </Container>
     );
