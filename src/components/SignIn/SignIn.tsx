@@ -10,12 +10,24 @@ enum SignInMarker {
     password = 'Password',
 }
 
-const Container = styled.div<{ isAnimationNeed: boolean }>`
+const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     width: 100vw;
+    background: ${colors.codGray};
+`;
+
+const Form = styled.div<{ isAnimationNeed: boolean }>`
+    background: ${colors.swansDown};
+    border-radius: 5px;
+    height: 250px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 7px 21px 4px rgba(176,207,203);
 
     ${(props) =>
         props.isAnimationNeed &&
@@ -28,18 +40,6 @@ const Container = styled.div<{ isAnimationNeed: boolean }>`
         css`
             animation: 0.8s linear ${fadeInAnimation};
     `}
-`;
-
-const Form = styled.div`
-    background: ${colors.swansDown};
-    border-radius: 5px;
-    border: 3px solid ${colors.riverBed};
-    height: 250px;
-    width: 450px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0px 7px 21px 4px rgba(176,207,203);
 `;
 
 const Input = styled.input<{color: string}>`
@@ -105,10 +105,10 @@ const SignIn = (props: Props) => {
 
 
     return (
-        <Container
-            isAnimationNeed={isFadeOut}
-            onAnimationEnd={(e: React.AnimationEvent<HTMLDivElement>) => onAnimationEndHandler(e)}>
-            <Form>
+        <Container>
+            <Form
+                isAnimationNeed={isFadeOut}
+                onAnimationEnd={(e: React.AnimationEvent<HTMLDivElement>) => onAnimationEndHandler(e)}>
                 <Input
                     placeholder="Log In"
                     value={logIn}
