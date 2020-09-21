@@ -54,9 +54,6 @@ const App = () => {
     }
   };
 
-  console.info('scroll up: ', isLogInClicked)
-  console.info('scroll down: ', isScrollDown)
-
   return (
     <>
       {!isLogInClicked && <SignIn onLogInClick={onLogInClick} />}
