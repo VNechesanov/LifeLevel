@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { colors } from '../../utils/theme';
@@ -48,20 +48,13 @@ type Props = {
 
 const UserInfo = (props: Props) => {
     const { userName, userScore, userPhoto } = props;
-    const [initialData, setInitialData] = useState({ userScore: 0, name: '', surname:''} as UserType)
-
-    useEffect(() => {
-        fetch('/userInfo').then(
-            response => response.json()
-        ).then(data => setInitialData(data))
-    },[])
 
     return (
         <Container>
             <Photo>{userPhoto}</Photo>
             <Wrapper>
-                <UserName>{initialData.name}{initialData.surname}</UserName>
-                <Score>{initialData.userScore}</Score>
+                <UserName>{userName}</UserName>
+                <Score>{userScore}</Score>
             </Wrapper>
         </Container>
     );
