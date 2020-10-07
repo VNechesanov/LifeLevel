@@ -6,10 +6,11 @@ services:
       dockerfile: Dockerfile
     environment:
       - APP_ENV=dev
-      - APP_FRONTEND_PORT=40002
+      - APP_FRONTEND_PORT=3000
     ports:
       - "3000:3000"
+    container_name: frontend
     stdin_open: true
     volumes:
-      - ./frontend:/usr/src/app/frontend
-      - /usr/src/app/frontend/node_modules
+      - ./frontend:/app
+      - /app/node_modules
