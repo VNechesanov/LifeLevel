@@ -1,63 +1,55 @@
-import React, { useState } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import React, { useEffect, useState } from 'react';
 
 import SideBar from './components/SideBar/SideBar';
 import MainLayout from './components/MainLayout/MainLayout';
 import SignIn from './components/SignIn/SignIn';
-
-const scrollContainerMovementUp = keyframes`
-  from {transform: translateY( ${window.innerHeight}px )};
-  to {transform: translateY(0)};
-`;
-
-const scrollContainerMovementDown = keyframes`
-  from {transform: translateY(0)};
-  to {transform: translateY( ${window.innerHeight}px )}
-`;
-
-const Wrapper = styled.div<{ scrollUp: boolean; scrollDown: boolean}>`
-    display: flex;
-    flex-direction: row;
-
-    ${(props) =>
-      props.scrollUp &&
-      css`
-        animation: 0.8s cubic-bezier(0.45, 0.05, 0, 1) ${scrollContainerMovementUp};
-    `};
-
-    ${(props) =>
-      props.scrollDown &&
-      css`
-          animation: 0.8s cubic-bezier(0.45, 0.05, 0, 1) ${scrollContainerMovementDown};
-    `};
-`;
+import { getAuthTokenfromLocalStorage, removeAuthTokenFromLocalStorage } from './store';
+import { Wrapper } from './styled';
+import { scrollContainerMovementDown } from './utils/common';
 
 const App = () => {
-  const [isLogInClicked, setLogIn] = useState(false);
+  const [isRegistrationNeed, setRegistration] = useState(true);
   const [isScrollDown, setScrollDown] = useState(false);
   const [isScrollUp, setScrollUp] = useState(false);
 
   const onLogInClick = () => {
-    setLogIn(true);
-    setScrollUp(true);
-    setScrollDown(false);
+    const token = getAuthTokenfromLocalStorage()
+
+    if (token !== "") {
+      setRegistration(false);
+      setScrollUp(true);
+      setScrollDown(false);
+    } else {
+      setRegistration(true);
+    }
   }
+
   const onSignOutClick = () => {
     setScrollDown(true);
     setScrollUp(false);
+    removeAuthTokenFromLocalStorage()
   }
 
   const onAnimationEndHandler = (e: React.AnimationEvent<HTMLDivElement>) => {
     e.persist();
     if (e.animationName === scrollContainerMovementDown.getName()) {
-      setLogIn(false);
+      setRegistration(true);
     }
   };
 
+  useEffect(() => {
+    const token = getAuthTokenfromLocalStorage()
+    if (token) {
+      setRegistration(false);
+    } else {
+      setRegistration(true);
+    }
+  }, [])
+
   return (
     <>
-      {!isLogInClicked && <SignIn onLogInClick={onLogInClick} />}
-      {isLogInClicked &&
+      {isRegistrationNeed && <SignIn onLogInClick={onLogInClick} />}
+      {!isRegistrationNeed &&
         <Wrapper
           scrollUp={isScrollUp}
           scrollDown={isScrollDown}

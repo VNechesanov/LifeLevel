@@ -4,4 +4,5 @@ export const colors = {
   swansDown: "#D9EBE9",
   riverBed: "#44535E",
   milanoRed: "#B00415",
+  mercury: "#E8E8E8",
 };
