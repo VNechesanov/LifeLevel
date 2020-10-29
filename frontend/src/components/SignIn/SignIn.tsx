@@ -1,50 +1,62 @@
-import React, { useState } from 'react';
-import { getAuthTokenfromLocalStorage } from '../../store';
+import React, { useState } from "react";
+import { getAuthTokenfromLocalStorage } from "../../store";
 
-import { registration } from '../../utils/api';
-import { fadeOutAnimation } from '../../utils/common';
-import { LOG_IN_DEFAULT_VALUE, PASSWORD_DEFAULT_VALUE } from '../../utils/ServiceVariables';
-import { colors } from '../../utils/theme';
-import { Container, Form, Input, LogIn, Choice, ChoiceWrapper, ButtonWrapper } from './styled';
+import { registration } from "../../utils/api";
+import { fadeOutAnimation } from "../../utils/common";
+import {
+  LOG_IN_DEFAULT_VALUE,
+  PASSWORD_DEFAULT_VALUE,
+} from "../../utils/ServiceVariables";
+import { colors } from "../../utils/theme";
+import {
+  Container,
+  Form,
+  Input,
+  LogIn,
+  Choice,
+  ChoiceWrapper,
+  ButtonWrapper,
+} from "./styled";
 
 enum SignInMarker {
-  logIn = 'LogIn',
-  password = 'Password',
-  name = 'Name',
-  surname = 'Surname',
-  email = 'Email'
+  logIn = "LogIn",
+  password = "Password",
+  name = "Name",
+  surname = "Surname",
+  email = "Email",
 }
 
 enum Status {
-  LogIn = 'logIn',
-  Registration = 'registration',
+  LogIn = "logIn",
+  Registration = "registration",
 }
 
 type Props = {
   onLogInClick: () => void;
-}
+};
 
 const SignIn = (props: Props) => {
   const { onLogInClick } = props;
 
-  const [logIn, setLogIn] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [email, setEmail] = useState('');
+  const [logIn, setLogIn] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
 
   const [isWrong, setWrong] = useState(false);
   const [isFadeOut, setFadeOut] = useState(false);
 
-  const [screenStatus, setScreenStatus] = useState(Status.LogIn)
+  const [screenStatus, setScreenStatus] = useState(Status.LogIn);
 
   const logInClicked = () => {
     switch (true) {
-      case screenStatus === Status.Registration && (!name || !surname || !email || !password):
+      case screenStatus === Status.Registration &&
+        (!name || !surname || !email || !password):
         setWrong(true);
         return;
       case screenStatus === Status.LogIn:
-        const token = getAuthTokenfromLocalStorage()
+        const token = getAuthTokenfromLocalStorage();
         if (!token) {
           setWrong(true);
           return;
@@ -54,15 +66,17 @@ const SignIn = (props: Props) => {
         registration(name, surname, email, password);
         setFadeOut(true);
         return;
-      case logIn === LOG_IN_DEFAULT_VALUE && password === PASSWORD_DEFAULT_VALUE:
+      case logIn === LOG_IN_DEFAULT_VALUE &&
+        password === PASSWORD_DEFAULT_VALUE:
         setWrong(false);
         setFadeOut(true);
         return;
-      case logIn !== LOG_IN_DEFAULT_VALUE || password !== PASSWORD_DEFAULT_VALUE:
+      case logIn !== LOG_IN_DEFAULT_VALUE ||
+        password !== PASSWORD_DEFAULT_VALUE:
         setWrong(true);
         return;
     }
-  }
+  };
 
   const handleChange = (e: any, marker: SignInMarker) => {
     setWrong(false);
@@ -79,7 +93,7 @@ const SignIn = (props: Props) => {
       case SignInMarker.email:
         return setEmail(e.target.value);
     }
-  }
+  };
 
   const onAnimationEndHandler = (e: React.AnimationEvent<HTMLDivElement>) => {
     e.persist();
@@ -90,49 +104,62 @@ const SignIn = (props: Props) => {
 
   const renderForm = () => {
     if (screenStatus === Status.LogIn) {
-      return <>
-        <Input
-          placeholder="Log In"
-          value={logIn}
-          onChange={(e) => handleChange(e, SignInMarker.logIn)}
-          color={isWrong ? colors.milanoRed : colors.riverBed} />
-        <Input
-          placeholder="Password"
-          value={password}
-          onChange={(e) => handleChange(e, SignInMarker.password)}
-          color={isWrong ? colors.milanoRed : colors.riverBed} />
-      </>
+      return (
+        <>
+          <Input
+            placeholder="Log In"
+            value={logIn}
+            onChange={(e) => handleChange(e, SignInMarker.logIn)}
+            color={isWrong ? colors.milanoRed : colors.riverBed}
+          />
+          <Input
+            placeholder="Password"
+            value={password}
+            onChange={(e) => handleChange(e, SignInMarker.password)}
+            color={isWrong ? colors.milanoRed : colors.riverBed}
+          />
+        </>
+      );
     }
 
-    return <>
-      <Input
-        placeholder="name"
-        value={name}
-        onChange={(e) => handleChange(e, SignInMarker.name)}
-        color={isWrong ? colors.milanoRed : colors.riverBed} />
-      <Input
-        placeholder="surname"
-        value={surname}
-        onChange={(e) => handleChange(e, SignInMarker.surname)}
-        color={isWrong ? colors.milanoRed : colors.riverBed} />
-      <Input
-        placeholder="email"
-        value={email}
-        onChange={(e) => handleChange(e, SignInMarker.email)}
-        color={isWrong ? colors.milanoRed : colors.riverBed} />
-      <Input
-        placeholder="password"
-        value={password}
-        onChange={(e) => handleChange(e, SignInMarker.password)}
-        color={isWrong ? colors.milanoRed : colors.riverBed} />
-    </>
-  }
+    return (
+      <>
+        <Input
+          placeholder="name"
+          value={name}
+          onChange={(e) => handleChange(e, SignInMarker.name)}
+          color={isWrong ? colors.milanoRed : colors.riverBed}
+        />
+        <Input
+          placeholder="surname"
+          value={surname}
+          onChange={(e) => handleChange(e, SignInMarker.surname)}
+          color={isWrong ? colors.milanoRed : colors.riverBed}
+        />
+        <Input
+          placeholder="email"
+          value={email}
+          onChange={(e) => handleChange(e, SignInMarker.email)}
+          color={isWrong ? colors.milanoRed : colors.riverBed}
+        />
+        <Input
+          placeholder="password"
+          value={password}
+          onChange={(e) => handleChange(e, SignInMarker.password)}
+          color={isWrong ? colors.milanoRed : colors.riverBed}
+        />
+      </>
+    );
+  };
 
   return (
     <Container>
       <Form
         isAnimationNeed={isFadeOut}
-        onAnimationEnd={(e: React.AnimationEvent<HTMLDivElement>) => onAnimationEndHandler(e)}>
+        onAnimationEnd={(e: React.AnimationEvent<HTMLDivElement>) =>
+          onAnimationEndHandler(e)
+        }
+      >
         {renderForm()}
         <ButtonWrapper>
           <ChoiceWrapper>
@@ -144,13 +171,11 @@ const SignIn = (props: Props) => {
               {` registration`}
             </Choice>
           </ChoiceWrapper>
-          <LogIn onClick={() => logInClicked()} >
-            Continue
-          </LogIn>
+          <LogIn onClick={() => logInClicked()}>Continue</LogIn>
         </ButtonWrapper>
       </Form>
     </Container>
-  )
-}
+  );
+};
 
 export default SignIn;

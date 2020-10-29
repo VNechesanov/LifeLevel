@@ -1,33 +1,46 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
 
-import { colors } from '../../utils/theme';
-import UserInfo from '../UserInfo/UserInfo';
+import UserInfo from "../UserInfo/UserInfo";
+import Plans from "./Plans/Plans";
+import { ButtonItem, Container, ControlWrapper, Separator } from "./styled";
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    height: 100vh;
-    background: ${colors.codGray};
-    overflow: hidden;
-    padding: 15px;
-`;
-
-const Separator = styled.div`
-    border: 2px solid ${colors.riverBed};
-    width: 100%;
-    border-radius: 5px;
-    margin-top: 65px;
-`;
+enum Menu {
+  Goals = "GOALS",
+  Plans = "PLANS",
+}
 
 const MainLayout = () => {
-    return (
-        <Container>
-            <UserInfo userName={'Name Surname'} userScore={4.7} />
-            <Separator/>
-        </Container>
-    );
-}
+  const [activeMenuSection, setActivMenuSection] = useState(Menu.Goals);
+
+  const onClick = (val: Menu) => {
+    setActivMenuSection(val === Menu.Goals ? Menu.Goals : Menu.Plans);
+  };
+
+  const content = () => {
+    switch (activeMenuSection) {
+      case Menu.Goals:
+        return <>Goals</>;
+      case Menu.Plans:
+      default:
+        return <Plans />;
+    }
+  };
+
+  return (
+    <Container>
+      <UserInfo userName={"Name Surname"} userScore={4.7} />
+      <ControlWrapper>
+        <ButtonItem type="primary" onClick={() => onClick(Menu.Goals)}>
+          Goals
+        </ButtonItem>
+        <ButtonItem type="primary" onClick={() => onClick(Menu.Plans)}>
+          Plans
+        </ButtonItem>
+      </ControlWrapper>
+      <Separator />
+      {content()}
+    </Container>
+  );
+};
 
 export default MainLayout;

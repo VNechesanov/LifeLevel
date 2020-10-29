@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import SideBar from './components/SideBar/SideBar';
-import MainLayout from './components/MainLayout/MainLayout';
-import SignIn from './components/SignIn/SignIn';
-import { getAuthTokenfromLocalStorage, removeAuthTokenFromLocalStorage } from './store';
-import { Wrapper } from './styled';
-import { scrollContainerMovementDown } from './utils/common';
+import SideBar from "./components/SideBar/SideBar";
+import MainLayout from "./components/MainLayout/MainLayout";
+import SignIn from "./components/SignIn/SignIn";
+import {
+  getAuthTokenfromLocalStorage,
+  removeAuthTokenFromLocalStorage,
+} from "./store";
+import { Wrapper } from "./styled";
+import { scrollContainerMovementDown } from "./utils/common";
 
 const App = () => {
   const [isRegistrationNeed, setRegistration] = useState(true);
@@ -13,7 +16,7 @@ const App = () => {
   const [isScrollUp, setScrollUp] = useState(false);
 
   const onLogInClick = () => {
-    const token = getAuthTokenfromLocalStorage()
+    const token = getAuthTokenfromLocalStorage();
 
     if (token !== "") {
       setRegistration(false);
@@ -22,13 +25,13 @@ const App = () => {
     } else {
       setRegistration(true);
     }
-  }
+  };
 
   const onSignOutClick = () => {
     setScrollDown(true);
     setScrollUp(false);
-    removeAuthTokenFromLocalStorage()
-  }
+    removeAuthTokenFromLocalStorage();
+  };
 
   const onAnimationEndHandler = (e: React.AnimationEvent<HTMLDivElement>) => {
     e.persist();
@@ -38,28 +41,31 @@ const App = () => {
   };
 
   useEffect(() => {
-    const token = getAuthTokenfromLocalStorage()
+    const token = getAuthTokenfromLocalStorage();
     if (token) {
       setRegistration(false);
     } else {
       setRegistration(true);
     }
-  }, [])
+  }, []);
 
   return (
     <>
       {isRegistrationNeed && <SignIn onLogInClick={onLogInClick} />}
-      {!isRegistrationNeed &&
+      {!isRegistrationNeed && (
         <Wrapper
           scrollUp={isScrollUp}
           scrollDown={isScrollDown}
-          onAnimationEnd={(e: React.AnimationEvent<HTMLDivElement>) => onAnimationEndHandler(e)}>
+          onAnimationEnd={(e: React.AnimationEvent<HTMLDivElement>) =>
+            onAnimationEndHandler(e)
+          }
+        >
           <SideBar onSignOutClick={onSignOutClick} />
           <MainLayout />
         </Wrapper>
-      }
+      )}
     </>
   );
-}
+};
 
 export default App;

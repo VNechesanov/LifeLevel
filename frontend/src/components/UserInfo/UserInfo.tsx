@@ -1,11 +1,11 @@
-import React from 'react';
-import { Container, Photo, Score, UserName, Wrapper } from './styled';
+import React from "react";
+import { Container, Photo, Score, UserName, Wrapper } from "./styled";
 
 type Props = {
   userName: string;
   userScore: number;
   userPhoto?: any;
-}
+};
 
 const UserInfo = (props: Props) => {
   const { userName, userScore, userPhoto } = props;
@@ -19,6 +19,6 @@ const UserInfo = (props: Props) => {
       </Wrapper>
     </Container>
   );
-}
+};
 
 export default UserInfo;
