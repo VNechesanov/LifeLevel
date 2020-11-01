@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import SideBar from "../SideBar/SideBar";
-import MyPage from "../MyPage/MyPage";
+import MyPage from "./MyPage/MyPage";
 import SignIn from "../SignIn/SignIn";
 import {
   getAuthTokenfromLocalStorage,

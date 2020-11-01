@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import UserInfo from "../UserInfo/UserInfo";
+import UserInfo from "../../UserInfo/UserInfo";
 import Plans from "./Plans/Plans";
 import { ButtonItem, Container, ControlWrapper, Separator } from "./styled";
 

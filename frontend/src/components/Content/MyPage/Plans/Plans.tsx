@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Control, Container, ControlWrapper, Stub } from "./styled";
-import ModalWindow from "../../../common/ModalWindow/ModalWindow";
+import ModalWindow from "../../../../common/ModalWindow/ModalWindow";
 
 const Plans = () => {
   const [visible, setVisible] = useState(false);

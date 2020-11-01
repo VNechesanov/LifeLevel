@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "antd/lib/button";
 
-import { colors } from "../../../utils/theme";
+import { colors } from "../../../../utils/theme";
 
 export const Stub = styled.div`
   color: ${colors.mercury};
