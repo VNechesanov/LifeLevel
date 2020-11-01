@@ -9,7 +9,7 @@ enum Menu {
   Plans = "PLANS",
 }
 
-const MainLayout = () => {
+const MyPage = () => {
   const [activeMenuSection, setActivMenuSection] = useState(Menu.Goals);
 
   const onClick = (val: Menu) => {
@@ -43,4 +43,4 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout;
+export default MyPage;
