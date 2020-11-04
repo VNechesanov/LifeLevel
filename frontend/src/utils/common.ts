@@ -19,3 +19,13 @@ export const fadeInAnimation = keyframes`
   opacity: 1;
   }
 `;
+
+export const scrollContainerMovementUp = keyframes`
+  from {transform: translateY( ${window.innerHeight}px )};
+  to {transform: translateY(0)};
+`;
+
+export const scrollContainerMovementDown = keyframes`
+  from {transform: translateY(0)};
+  to {transform: translateY( ${window.innerHeight}px )}
+`;
