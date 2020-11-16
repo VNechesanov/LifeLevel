@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import Modal from "antd/lib/modal";
 import DatePicker from "antd/lib/date-picker";
 import Input from "antd/lib/input";
 
-import { DescriptionWrapper, PickerWrapper, Wrapper, Title } from "./styled";
+import {
+  DescriptionWrapper,
+  PickerWrapper,
+  Wrapper,
+  Title,
+  CheckboxWrapper,
+  ModalWrapper,
+  DateWrapper,
+} from "./styled";
+import { colors } from "../../utils/theme";
 
 enum Priority {
   none,
@@ -28,6 +36,11 @@ type Props = {
   onClose: () => void;
 };
 
+interface CheckBoxesModel {
+  color: string;
+  priority: Priority;
+}
+
 const { TextArea } = Input;
 const INITIAL_STATE: Data = {
   date: "",
@@ -37,6 +50,29 @@ const INITIAL_STATE: Data = {
   priority: Priority.none,
 };
 
+const checkBoxes: CheckBoxesModel[] = [
+  {
+    color: colors.swansDown,
+    priority: Priority.high,
+  },
+  {
+    color: colors.blueSmoke,
+    priority: Priority.mediumPlus,
+  },
+  {
+    color: colors.riverBed,
+    priority: Priority.medium,
+  },
+  {
+    color: colors.ebony,
+    priority: Priority.lowPlus,
+  },
+  {
+    color: colors.black,
+    priority: Priority.low,
+  },
+];
+
 const AddTaskModalWindow = (props: Props) => {
   const { visible, onClose } = props;
   const [{ date, time, name, description, priority }, setState] = useState(
@@ -44,12 +80,25 @@ const AddTaskModalWindow = (props: Props) => {
   );
 
   const clearState = () => setState({ ...INITIAL_STATE });
-  const setInfoFromControls = (name: string, value: string) => setState((prevState) => ({ ...prevState, [name]: value }));
-  const onCancelClick = () => {clearState(); onClose();}
-  const onOkClick = () => {clearState(); onClose();}
+  const setInfoFromControls = (name: string, value: string) =>
+    setState((prevState: any) => ({ ...prevState, [name]: value }));
+  const onCancelClick = () => {
+    clearState();
+    onClose();
+  };
+  const onOkClick = () => {
+    clearState();
+    onClose();
+  };
+
+  const makeCheckboxes = () => {
+    return checkBoxes.map((checkBox) => {
+      return <CheckboxWrapper color={checkBox.color}></CheckboxWrapper>;
+    });
+  };
 
   return (
-    <Modal
+    <ModalWrapper
       title="Add new task"
       visible={visible}
       destroyOnClose
@@ -57,19 +106,21 @@ const AddTaskModalWindow = (props: Props) => {
       onCancel={onCancelClick}
       onOk={onOkClick}
     >
-      <PickerWrapper>
-        <DatePicker
-          onChange={(_, dateString: string) =>
-            setInfoFromControls("date", dateString)
-          }
-        />
-        <DatePicker
-          picker={"time"}
-          onChange={(_, timeString: string) =>
-            setInfoFromControls("time", timeString)
-          }
-        />
-      </PickerWrapper>
+      <DateWrapper>
+        <PickerWrapper>
+          <DatePicker
+            onChange={(_, dateString: string) =>
+              setInfoFromControls("date", dateString)
+            }
+          />
+          <DatePicker
+            picker={"time"}
+            onChange={(_, timeString: string) =>
+              setInfoFromControls("time", timeString)
+            }
+          />
+        </PickerWrapper>
+      </DateWrapper>
       <Wrapper>
         <Title>Name:</Title>
         <Input
@@ -89,10 +140,11 @@ const AddTaskModalWindow = (props: Props) => {
           onChange={(e) => setInfoFromControls("description", e.target.value)}
         />
       </DescriptionWrapper>
-      {/* <Wrapper>
+      <Wrapper>
         <Title>Priority:</Title>
-      </Wrapper> */}
-    </Modal>
+        {makeCheckboxes()}
+      </Wrapper>
+    </ModalWrapper>
   );
 };
 
