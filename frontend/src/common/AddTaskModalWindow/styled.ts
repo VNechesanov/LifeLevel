@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Checkbox from "antd/lib/checkbox";
 import Modal from "antd/lib/modal";
 
-import { colors } from "../../utils/theme";
+import { colors } from "@utils";
 
 export const ModalWrapper = styled(Modal)`
   .ant-modal-header {

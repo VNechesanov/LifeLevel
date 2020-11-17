@@ -1,7 +1,5 @@
 import styled, { css } from "styled-components";
-import { fadeInAnimation, fadeOutAnimation } from "../../utils/common";
-
-import { colors } from "../../utils/theme";
+import { fadeInAnimation, fadeOutAnimation, colors } from "@utils";
 
 export const Container = styled.div`
   display: flex;

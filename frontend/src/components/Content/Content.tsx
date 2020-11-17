@@ -8,7 +8,7 @@ import {
   removeAuthTokenFromLocalStorage,
 } from "../../store/index";
 import { Container, Wrapper } from "./styled";
-import { scrollContainerMovementDown } from "../../utils/common";
+import { scrollContainerMovementDown } from "@utils";
 
 const Content = () => {
   const [isRegistrationNeed, setRegistration] = useState(true);

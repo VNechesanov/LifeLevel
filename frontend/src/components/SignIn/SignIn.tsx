@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { getAuthTokenfromLocalStorage } from "../../store";
 
-import { registration } from "../../utils/api";
-import { fadeOutAnimation } from "../../utils/common";
 import {
+  registration,
+  fadeOutAnimation,
   LOG_IN_DEFAULT_VALUE,
   PASSWORD_DEFAULT_VALUE,
-} from "../../utils/ServiceVariables";
-import { colors } from "../../utils/theme";
+  colors,
+} from "@utils";
 import {
   Container,
   Form,
