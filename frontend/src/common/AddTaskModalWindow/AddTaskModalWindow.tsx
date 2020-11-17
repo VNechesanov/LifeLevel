@@ -75,27 +75,13 @@ const checkBoxes: CheckBoxesModel[] = [
 
 const AddTaskModalWindow = (props: Props) => {
   const { visible, onClose } = props;
-  const [{ date, time, name, description, priority }, setState] = useState(
-    INITIAL_STATE
-  );
+  const [{ date, time, name, description, priority }, setState] = useState(INITIAL_STATE);
 
   const clearState = () => setState({ ...INITIAL_STATE });
-  const setInfoFromControls = (name: string, value: string) =>
-    setState((prevState: any) => ({ ...prevState, [name]: value }));
-  const onCancelClick = () => {
-    clearState();
-    onClose();
-  };
-  const onOkClick = () => {
-    clearState();
-    onClose();
-  };
-
-  const makeCheckboxes = () => {
-    return checkBoxes.map((checkBox) => {
-      return <CheckboxWrapper color={checkBox.color}></CheckboxWrapper>;
-    });
-  };
+  const setInfoFromControls = (name: string, value: string) => setState((prevState: any) => ({ ...prevState, [name]: value }));
+  const onCancelClick = () => { clearState(); onClose(); };
+  const onOkClick = () => { clearState(); onClose(); };
+  const renderCheckboxes = () => checkBoxes.map((checkBox) => <CheckboxWrapper color={checkBox.color}></CheckboxWrapper>);
 
   return (
     <ModalWrapper
@@ -142,7 +128,7 @@ const AddTaskModalWindow = (props: Props) => {
       </DescriptionWrapper>
       <Wrapper>
         <Title>Priority:</Title>
-        {makeCheckboxes()}
+        {renderCheckboxes()}
       </Wrapper>
     </ModalWrapper>
   );
