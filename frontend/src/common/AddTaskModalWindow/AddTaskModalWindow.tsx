@@ -11,8 +11,11 @@ import {
   CheckboxWrapper,
   ModalWrapper,
   DateWrapper,
+  CheckMarker,
+  BoxWrapper,
 } from "./styled";
-import { Data, Priority, colors } from "@utils";
+import { Priority, colors } from "src/utils";
+import useAddTaskModalWindow from "src/hooks/useAddTaskModalWindow";
 
 type Props = {
   visible: boolean;
@@ -21,61 +24,87 @@ type Props = {
 
 interface CheckBoxesModel {
   color: string;
+  markerColor: string;
   priority: Priority;
 }
 
 const { TextArea } = Input;
-const INITIAL_STATE: Data = {
-  date: "",
-  time: "",
-  name: "",
-  description: "",
-  priority: Priority.none,
-};
 
 const checkBoxes: CheckBoxesModel[] = [
   {
     color: colors.swansDown,
+    markerColor: colors.black,
     priority: Priority.high,
   },
   {
     color: colors.blueSmoke,
+    markerColor: colors.mercury,
     priority: Priority.mediumPlus,
   },
   {
     color: colors.riverBed,
+    markerColor: colors.white,
     priority: Priority.medium,
   },
   {
     color: colors.ebony,
+    markerColor: colors.white,
     priority: Priority.lowPlus,
   },
   {
     color: colors.black,
+    markerColor: colors.white,
     priority: Priority.low,
   },
 ];
 
 const AddTaskModalWindow = (props: Props) => {
   const { visible, onClose } = props;
-  const [{ date, time, name, description, priority }, setState] = useState(
-    INITIAL_STATE
-  );
+  const [isCheckMark, setCheckMark] = useState(false);
+  const [
+    { date, time, name, description, priority },
+    setDate,
+    setTime,
+    setName,
+    setDescription,
+    setPriority,
+  ] = useAddTaskModalWindow();
 
-  const clearState = () => setState({ ...INITIAL_STATE });
-  const setInfoFromControls = (name: string, value: string) =>
-    setState((prevState: any) => ({ ...prevState, [name]: value }));
+  const clearState = () => {
+    setDate("");
+    setTime("");
+    setName("");
+    setDescription("");
+    setPriority(Priority.none);
+  };
+
   const onCancelClick = () => {
+    setCheckMark(false);
     clearState();
     onClose();
   };
+
   const onOkClick = () => {
+    setCheckMark(false);
     clearState();
     onClose();
   };
+
+  const checkBoxClicked = (priorityVal: Priority) => {
+    setPriority(priorityVal);
+    setCheckMark(true);
+  };
+
   const renderCheckboxes = () =>
     checkBoxes.map((checkBox) => (
-      <CheckboxWrapper color={checkBox.color}></CheckboxWrapper>
+      <CheckboxWrapper
+        color={checkBox.color}
+        onClick={() => checkBoxClicked(checkBox.priority)}
+      >
+        {isCheckMark && priority === checkBox.priority && (
+          <CheckMarker markerColor={checkBox.markerColor} />
+        )}
+      </CheckboxWrapper>
     ));
 
   return (
@@ -90,15 +119,11 @@ const AddTaskModalWindow = (props: Props) => {
       <DateWrapper>
         <PickerWrapper>
           <DatePicker
-            onChange={(_, dateString: string) =>
-              setInfoFromControls("date", dateString)
-            }
+            onChange={(_, dateString: string) => setDate(dateString)}
           />
           <DatePicker
             picker={"time"}
-            onChange={(_, timeString: string) =>
-              setInfoFromControls("time", timeString)
-            }
+            onChange={(_, timeString: string) => setTime(timeString)}
           />
         </PickerWrapper>
       </DateWrapper>
@@ -108,7 +133,7 @@ const AddTaskModalWindow = (props: Props) => {
           placeholder="input task name"
           allowClear
           value={name}
-          onChange={(e) => setInfoFromControls("name", e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
       </Wrapper>
       <DescriptionWrapper>
@@ -118,12 +143,12 @@ const AddTaskModalWindow = (props: Props) => {
           placeholder="input task description"
           maxLength={1000}
           value={description}
-          onChange={(e) => setInfoFromControls("description", e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </DescriptionWrapper>
       <Wrapper>
         <Title>Priority:</Title>
-        {renderCheckboxes()}
+        <BoxWrapper>{renderCheckboxes()}</BoxWrapper>
       </Wrapper>
     </ModalWrapper>
   );

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "antd/lib/button";
 
-import { colors } from "@utils";
+import { colors, px } from "src/utils";
 
 export const Container = styled.div`
   display: flex;
@@ -10,14 +10,14 @@ export const Container = styled.div`
   height: 100vh;
   background: ${colors.codGray};
   overflow: hidden;
-  padding: 15px;
+  padding: ${px(15)};
 `;
 
 export const Separator = styled.div`
-  border: 2px solid ${colors.riverBed};
+  border: ${px(2)} solid ${colors.riverBed};
   width: 100%;
-  border-radius: 5px;
-  margin-top: 9px;
+  border-radius: ${px(5)};
+  margin-top: ${px(9)};
 `;
 
 export const ControlWrapper = styled.div`
@@ -27,11 +27,11 @@ export const ControlWrapper = styled.div`
 `;
 
 export const ButtonItem = styled(Button)`
-  margin-left: 15px;
+  margin-left: ${px(15)};
   background: ${colors.riverBed};
   color: ${colors.mercury};
   border: none;
-  border-radius: 2px;
+  border-radius: ${px(2)};
   outline: none;
   cursor: pointer;
 

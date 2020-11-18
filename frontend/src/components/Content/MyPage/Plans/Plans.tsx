@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Control, Container, ControlWrapper, Stub } from "./styled";
-import AddTaskModalWindow from "../../../../common/AddTaskModalWindow/AddTaskModalWindow";
+import AddTaskModalWindow from "src/common/AddTaskModalWindow/AddTaskModalWindow";
 
 const Plans = () => {
   const [visible, setVisible] = useState(false);
@@ -18,7 +18,7 @@ const Plans = () => {
         </Control>
       </ControlWrapper>
       <AddTaskModalWindow visible={visible} onClose={() => setVisible(false)} />
-      <Stub>You hav no tasks for now</Stub>
+      {!visible && <Stub>You hav no tasks for now</Stub>}
     </Container>
   );
 };

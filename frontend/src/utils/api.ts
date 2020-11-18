@@ -1,4 +1,4 @@
-import { saveAuthTokenToLocalStorage } from "../store";
+import { saveAuthTokenToLocalStorage } from "src/store";
 
 type UserInfo = {
   name: string;

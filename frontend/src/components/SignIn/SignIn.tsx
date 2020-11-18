@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getAuthTokenfromLocalStorage } from "../../store";
+import { getAuthTokenfromLocalStorage } from "src/store";
 
 import {
   registration,
@@ -7,7 +7,7 @@ import {
   LOG_IN_DEFAULT_VALUE,
   PASSWORD_DEFAULT_VALUE,
   colors,
-} from "@utils";
+} from "src/utils";
 import {
   Container,
   Form,

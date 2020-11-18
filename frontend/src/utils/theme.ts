@@ -2,6 +2,7 @@ export const colors = {
   codGray: "#161616",
   milanoRed: "#B00415",
   mercury: "#E8E8E8",
+  white: "#FFFFFF",
 
   swansDown: "#D9EBE9",
   blueSmoke: "#798F8C",

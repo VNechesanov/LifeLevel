@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import Checkbox from "antd/lib/checkbox";
 import Modal from "antd/lib/modal";
+import { CheckOutlined } from "@ant-design/icons";
 
-import { colors } from "@utils";
+import { colors, px } from "src/utils";
 
 export const ModalWrapper = styled(Modal)`
   .ant-modal-header {
@@ -10,11 +11,11 @@ export const ModalWrapper = styled(Modal)`
   }
 
   .ant-modal-title {
-    font-size: 24px;
+    font-size: ${px(24)};
   }
 
   .ant-modal-close-x {
-    font-size: 24px;
+    font-size: ${px(24)};
   }
 
   .ant-modal-footer {
@@ -24,13 +25,13 @@ export const ModalWrapper = styled(Modal)`
       border-color: ${colors.riverBed};
       background: ${colors.riverBed};
       color: white;
-      font-size: 14px;
+      font-size: ${px(14)};
     }
   }
 `;
 
 export const Wrapper = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: ${px(20)};
   display: flex;
 `;
 
@@ -43,14 +44,14 @@ export const PickerWrapper = styled(Wrapper)`
   margin-bottom: 0;
 
   .ant-picker:first-child {
-    margin-right: 24px;
+    margin-right: ${px(24)};
   }
 `;
 
 export const Title = styled(Wrapper)`
   color: black;
-  font-size: 18px;
-  margin-right: 15px;
+  font-size: ${px(18)};
+  margin-right: ${px(15)};
   margin-bottom: 0;
 `;
 
@@ -59,10 +60,11 @@ export const DescriptionWrapper = styled(Wrapper)`
 `;
 
 export const CheckboxWrapper = styled(Checkbox)<{ color: string }>`
-  font-size: 24px;
+  position: relative;
+  font-size: ${px(24)};
 
   .ant-checkbox-wrapper {
-    font-size: 24px;
+    font-size: ${px(24)};
   }
 
   .ant-checkbox-inner {
@@ -73,4 +75,27 @@ export const CheckboxWrapper = styled(Checkbox)<{ color: string }>`
   .ant-checkbox-checked::after {
     border-color: ${(props) => props.color};
   }
+
+  .ant-checkbox-inner {
+    width: ${px(35)};
+    height: ${px(35)};
+  }
+
+  .ant-checkbox-inner::after {
+    display: none;
+  }
+`;
+
+export const CheckMarker = styled(CheckOutlined)<{ markerColor: string }>`
+  position: absolute;
+  top: 50%;
+  left: 37%;
+  transform: translate(-50%, -50%);
+  color: ${(props) => props.markerColor};
+`;
+
+export const BoxWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
 `;

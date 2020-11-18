@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import Button from "antd/lib/button";
 
-import { colors } from "@utils";
+import { colors, px } from "src/utils";
 
 export const Stub = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
   color: ${colors.mercury};
-  font-size: 37px;
+  font-size: ${px(37)};
 `;
 
 export const ControlWrapper = styled.div`
@@ -15,11 +18,11 @@ export const ControlWrapper = styled.div`
 `;
 
 export const Control = styled(Button)`
-  margin-left: 15px;
+  margin-left: ${px(15)};
   background: ${colors.riverBed};
   color: ${colors.mercury};
   border: none;
-  border-radius: 2px;
+  border-radius: ${px(2)};
   outline: none;
   cursor: pointer;
 `;
@@ -27,5 +30,5 @@ export const Control = styled(Button)`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 15px;
+  padding-top: ${px(15)};
 `;
