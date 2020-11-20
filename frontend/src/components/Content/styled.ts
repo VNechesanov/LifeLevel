@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import {
   scrollContainerMovementDown,
   scrollContainerMovementUp,
-} from "../../utils/common";
+} from "src/utils";
 
 export const Wrapper = styled.div<{ scrollUp: boolean; scrollDown: boolean }>`
   display: flex;

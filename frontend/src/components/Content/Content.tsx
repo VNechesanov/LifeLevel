@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import SideBar from "../SideBar/SideBar";
-import MyPage from "./MyPage/MyPage";
-import SignIn from "../SignIn/SignIn";
+import SideBar from "src/components/SideBar/SideBar";
+import MyPage from "src/components/Content/MyPage/MyPage";
+import SignIn from "src/components/SignIn/SignIn";
 import {
   getAuthTokenfromLocalStorage,
   removeAuthTokenFromLocalStorage,
-} from "../../store/index";
+} from "src/store/index";
 import { Container, Wrapper } from "./styled";
-import { scrollContainerMovementDown } from "../../utils/common";
+import { scrollContainerMovementDown } from "src/utils";
 
 const Content = () => {
   const [isRegistrationNeed, setRegistration] = useState(true);

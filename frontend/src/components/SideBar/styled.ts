@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "../../utils/theme";
+import { colors, px } from "src/utils";
 
 export const Container = styled.div`
   display: flex;
@@ -17,9 +17,9 @@ export const SignOut = styled.div`
   display: flex;
   color: ${colors.swansDown};
   font-weight: 200;
-  font-size: 17px;
+  font-size: ${px(17)};
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: ${px(20)};
   cursor: pointer;
 `;
 
