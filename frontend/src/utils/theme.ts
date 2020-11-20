@@ -9,4 +9,6 @@ export const colors = {
   riverBed: "#44535E",
   ebony: "#0E1821",
   black: "#000000",
+
+  codGray2: "#181818",
 };

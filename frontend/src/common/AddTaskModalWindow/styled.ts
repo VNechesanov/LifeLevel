@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Checkbox from "antd/lib/checkbox";
 import Modal from "antd/lib/modal";
-import { CheckOutlined } from "@ant-design/icons";
+import { BorderOutlined } from "@ant-design/icons";
 
 import { colors, px } from "src/utils";
 
@@ -86,12 +86,14 @@ export const CheckboxWrapper = styled(Checkbox)<{ color: string }>`
   }
 `;
 
-export const CheckMarker = styled(CheckOutlined)<{ markerColor: string }>`
+export const CheckMarker = styled(BorderOutlined)<{ markerColor: string }>`
   position: absolute;
   top: 50%;
-  left: 37%;
-  transform: translate(-50%, -50%);
+  left: 35%;
+  transform: translate(-52%, -48%);
   color: ${(props) => props.markerColor};
+  background-color: ${(props) => props.markerColor};
+  border-radius: ${px(1)};
 `;
 
 export const BoxWrapper = styled.div`

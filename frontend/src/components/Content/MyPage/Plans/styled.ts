@@ -32,3 +32,13 @@ export const Container = styled.div`
   flex-direction: column;
   padding-top: ${px(15)};
 `;
+
+export const TaskWrapper = styled.div<{ height: number }>`
+  display: flex;
+  flex-direction: column;
+  margin-top: ${px(15)};
+  height: ${(props) => px(props.height)};
+  padding-left: ${px(15)};
+  padding-right: ${px(15)};
+  overflow-y: scroll;
+`;

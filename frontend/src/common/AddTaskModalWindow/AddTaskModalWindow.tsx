@@ -14,12 +14,13 @@ import {
   CheckMarker,
   BoxWrapper,
 } from "./styled";
-import { Priority, colors } from "src/utils";
+import { Priority, colors, Data, makeid } from "src/utils";
 import useAddTaskModalWindow from "src/hooks/useAddTaskModalWindow";
 
 type Props = {
   visible: boolean;
   onClose: () => void;
+  onOk: (obj: Data, id: string) => void;
 };
 
 interface CheckBoxesModel {
@@ -33,13 +34,13 @@ const { TextArea } = Input;
 const checkBoxes: CheckBoxesModel[] = [
   {
     color: colors.swansDown,
-    markerColor: colors.black,
-    priority: Priority.high,
+    markerColor: colors.white,
+    priority: Priority.low,
   },
   {
     color: colors.blueSmoke,
-    markerColor: colors.mercury,
-    priority: Priority.mediumPlus,
+    markerColor: colors.white,
+    priority: Priority.lowPlus,
   },
   {
     color: colors.riverBed,
@@ -49,17 +50,17 @@ const checkBoxes: CheckBoxesModel[] = [
   {
     color: colors.ebony,
     markerColor: colors.white,
-    priority: Priority.lowPlus,
+    priority: Priority.mediumPlus,
   },
   {
     color: colors.black,
     markerColor: colors.white,
-    priority: Priority.low,
+    priority: Priority.high,
   },
 ];
 
 const AddTaskModalWindow = (props: Props) => {
-  const { visible, onClose } = props;
+  const { visible, onClose, onOk } = props;
   const [isCheckMark, setCheckMark] = useState(false);
   const [
     { date, time, name, description, priority },
@@ -87,6 +88,7 @@ const AddTaskModalWindow = (props: Props) => {
   const onOkClick = () => {
     setCheckMark(false);
     clearState();
+    onOk({ date, time, name, description, priority }, makeid());
     onClose();
   };
 
@@ -114,6 +116,7 @@ const AddTaskModalWindow = (props: Props) => {
       destroyOnClose
       forceRender
       onCancel={onCancelClick}
+      // onOk={() => date && time && name && description && priority && onOkClick()}
       onOk={onOkClick}
     >
       <DateWrapper>

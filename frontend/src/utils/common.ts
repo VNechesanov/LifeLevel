@@ -33,3 +33,14 @@ export const scrollContainerMovementDown = keyframes`
 `;
 
 export const px = (pixels: number) => `${pixels * REM_RATIO}rem`;
+
+export const makeid = () => {
+  let result = "";
+  let characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let charactersLength = characters.length;
+  for (var i = 0; i < 15; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};

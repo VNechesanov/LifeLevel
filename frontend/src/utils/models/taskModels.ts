@@ -14,3 +14,8 @@ export type Data = {
   description: string;
   priority: Priority;
 };
+
+export type TaskItem = {
+  taskInfo: Data;
+  id: string;
+};
