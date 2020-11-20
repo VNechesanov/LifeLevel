@@ -25,7 +25,6 @@ type Props = {
 
 interface CheckBoxesModel {
   color: string;
-  markerColor: string;
   priority: Priority;
 }
 
@@ -34,27 +33,22 @@ const { TextArea } = Input;
 const checkBoxes: CheckBoxesModel[] = [
   {
     color: colors.swansDown,
-    markerColor: colors.white,
     priority: Priority.low,
   },
   {
     color: colors.blueSmoke,
-    markerColor: colors.white,
     priority: Priority.lowPlus,
   },
   {
     color: colors.riverBed,
-    markerColor: colors.white,
     priority: Priority.medium,
   },
   {
     color: colors.ebony,
-    markerColor: colors.white,
     priority: Priority.mediumPlus,
   },
   {
     color: colors.black,
-    markerColor: colors.white,
     priority: Priority.high,
   },
 ];
@@ -104,7 +98,7 @@ const AddTaskModalWindow = (props: Props) => {
         onClick={() => checkBoxClicked(checkBox.priority)}
       >
         {isCheckMark && priority === checkBox.priority && (
-          <CheckMarker markerColor={checkBox.markerColor} />
+          <CheckMarker/>
         )}
       </CheckboxWrapper>
     ));

@@ -86,13 +86,13 @@ export const CheckboxWrapper = styled(Checkbox)<{ color: string }>`
   }
 `;
 
-export const CheckMarker = styled(BorderOutlined)<{ markerColor: string }>`
+export const CheckMarker = styled(BorderOutlined)`
   position: absolute;
   top: 50%;
   left: 35%;
   transform: translate(-52%, -48%);
-  color: ${(props) => props.markerColor};
-  background-color: ${(props) => props.markerColor};
+  color: ${colors.white};
+  background-color: ${colors.white};
   border-radius: ${px(1)};
 `;
 
