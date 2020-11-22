@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import DatePicker from "antd/lib/date-picker";
 import Input from "antd/lib/input";
 import Tag from "antd/lib/tag";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 
 import {
   DescriptionWrapper,
@@ -11,10 +12,13 @@ import {
   Title,
   ModalWrapper,
   DateWrapper,
+  Hint,
+  PopUpBox,
 } from "./styled";
 import { colors, makeid } from "src/utils";
 import useAddGoalModalWindow from "src/hooks/useAddGoalModalWindow";
 import { useGoals } from "src/GlobalState/GoalsState";
+import { dateHelper, tagsHelper } from "./helper";
 
 type Props = {
   visible: boolean;
@@ -74,6 +78,13 @@ const AddGoalModalWindow = (props: Props) => {
     setTagName("");
   };
 
+  const renderHint = (hintText: JSX.Element) => (
+    <Hint>
+      <QuestionCircleOutlined />
+      <PopUpBox>{hintText}</PopUpBox>
+    </Hint>
+  );
+
   return (
     <ModalWrapper
       title="Add new goal"
@@ -90,6 +101,7 @@ const AddGoalModalWindow = (props: Props) => {
             onChange={(_, dateString: string) => setDate(dateString)}
           />
         </PickerWrapper>
+        {renderHint(dateHelper)}
       </DateWrapper>
       <Wrapper>
         <Title>Name:</Title>
@@ -112,6 +124,7 @@ const AddGoalModalWindow = (props: Props) => {
       </DescriptionWrapper>
       <Wrapper>
         <Title>Tags:</Title>
+        {renderHint(tagsHelper)}
         <Input
           placeholder="input tags"
           allowClear

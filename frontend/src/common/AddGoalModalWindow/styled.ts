@@ -101,3 +101,32 @@ export const BoxWrapper = styled.div`
   width: 100%;
   justify-content: center;
 `;
+
+export const Hint = styled.div`
+  position: relative;
+  margin-right: ${px(8)};
+  align-self: center;
+  text-align: center;
+`;
+
+export const PopUpBox = styled.div`
+  position: absolute;
+  visibility: hidden;
+  min-width: ${px(200)};
+  overflow: hidden;
+  overflow-wrap: break-word;
+  font-size: ${px(11)};
+  color: ${colors.white};
+  border-radius: ${px(2)};
+  line-height: ${px(16)};
+  padding: ${px(8)} ${px(10)};
+  top: ${px(-8.8)};
+  left: 105%;
+  margin-left: ${px(10)};
+  background-color: ${colors.ebony};
+  z-index: 999;
+
+  ${Hint}:hover & {
+    visibility: visible;
+  }
+`;
