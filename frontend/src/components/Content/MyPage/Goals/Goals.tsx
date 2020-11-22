@@ -14,13 +14,12 @@ const Goals = () => {
       visible={visible}
       stubTitle="You hav no goals for now"
       addButtonName="add goal"
-      onClose={(id: string) => setGoals((goals || []).filter((t) => t.id !== id))}
+      onClose={(id: string) =>
+        setGoals((goals || []).filter((t) => t.id !== id))
+      }
       showModal={() => setVisible(true)}
     >
-      <AddGoalModalWindow
-        visible={visible}
-        onClose={() => setVisible(false)}
-      />
+      <AddGoalModalWindow visible={visible} onClose={() => setVisible(false)} />
     </CommonContent>
   );
 };

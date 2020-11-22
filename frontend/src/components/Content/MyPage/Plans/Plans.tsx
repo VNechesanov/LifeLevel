@@ -14,13 +14,12 @@ const Plans = () => {
       visible={visible}
       stubTitle="You hav no tasks for now"
       addButtonName="add task"
-      onClose={(id: string) => setTasks((tasks || []).filter((t) => t.id !== id))}
+      onClose={(id: string) =>
+        setTasks((tasks || []).filter((t) => t.id !== id))
+      }
       showModal={() => setVisible(true)}
     >
-      <AddTaskModalWindow
-        visible={visible}
-        onClose={() => setVisible(false)}
-      />
+      <AddTaskModalWindow visible={visible} onClose={() => setVisible(false)} />
     </CommonContent>
   );
 };
