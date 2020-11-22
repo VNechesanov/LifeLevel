@@ -34,8 +34,24 @@ export const ButtonItem = styled(Button)`
   border-radius: ${px(2)};
   outline: none;
   cursor: pointer;
+  outline: none;
 
   &:first-child {
     margin-left: 0;
   }
+`;
+
+export const ActiveMark = styled.div<{ width: number; isVisible: boolean }>`
+  width: ${(props) => px(props.width)};
+  height: ${px(6)};
+  background-color: ${colors.mercury};
+  margin-left: ${px(15)};
+  margin-bottom: ${px(5)};
+  visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
+  border-radius: ${px(1)};
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

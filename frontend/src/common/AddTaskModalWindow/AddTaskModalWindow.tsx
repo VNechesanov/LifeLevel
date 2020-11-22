@@ -14,13 +14,13 @@ import {
   CheckMarker,
   BoxWrapper,
 } from "./styled";
-import { Priority, colors, Data, makeid } from "src/utils";
+import { Priority, colors, makeid } from "src/utils";
 import useAddTaskModalWindow from "src/hooks/useAddTaskModalWindow";
+import { useTasks } from "src/GlobalState/TaskState";
 
 type Props = {
   visible: boolean;
   onClose: () => void;
-  onOk: (obj: Data, id: string) => void;
 };
 
 interface CheckBoxesModel {
@@ -54,8 +54,9 @@ const checkBoxes: CheckBoxesModel[] = [
 ];
 
 const AddTaskModalWindow = (props: Props) => {
-  const { visible, onClose, onOk } = props;
+  const { visible, onClose } = props;
   const [isCheckMark, setCheckMark] = useState(false);
+  const [tasks, setTasks] = useTasks();
   const [
     { date, time, name, description, priority },
     setDate,
@@ -80,9 +81,14 @@ const AddTaskModalWindow = (props: Props) => {
   };
 
   const onOkClick = () => {
+    setTasks(
+      (tasks || []).concat({
+        info: { date, time, name, description, priority },
+        id: makeid(),
+      })
+    );
     setCheckMark(false);
     clearState();
-    onOk({ date, time, name, description, priority }, makeid());
     onClose();
   };
 
@@ -97,9 +103,7 @@ const AddTaskModalWindow = (props: Props) => {
         color={checkBox.color}
         onClick={() => checkBoxClicked(checkBox.priority)}
       >
-        {isCheckMark && priority === checkBox.priority && (
-          <CheckMarker/>
-        )}
+        {isCheckMark && priority === checkBox.priority && <CheckMarker />}
       </CheckboxWrapper>
     ));
 
