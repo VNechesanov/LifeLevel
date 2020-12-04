@@ -1,6 +1,6 @@
 import React from "react";
 
-import { colors, Data, Priority } from "src/utils";
+import { colors, KeyValueObj, Priority } from "src/utils";
 import {
   CloseButton,
   Container,
@@ -12,15 +12,14 @@ import {
   Wrapper,
 } from "./styled";
 
-type Props = {
-  taskInfo: Data;
+type Props<T> = {
+  info: T;
   id: string;
   onClose: (id: string) => void;
 };
 
-const Task = (props: Props) => {
-  const { taskInfo, id, onClose } = props;
-  const { date, time, name, description, priority } = taskInfo;
+const Card = <T extends KeyValueObj>(props: Props<T>) => {
+  const { info, id, onClose } = props;
 
   const getPriorityColor = (val: Priority) => {
     switch (val) {
@@ -41,12 +40,12 @@ const Task = (props: Props) => {
 
   return (
     <Container>
-      <PriorityMarker color={getPriorityColor(priority)} />
+      <PriorityMarker color={getPriorityColor(info.priority)} />
       <ContentWrapper>
         <Header>
           <Wrapper>
-            <Title>{name}</Title>
-            <Time>{`${date}, ${time}`}</Time>
+            <Title>{info.name}</Title>
+            <Time>{`${info.date}, ${info.time || ""}`}</Time>
           </Wrapper>
           <CloseButton onClick={() => onClose(id)} />
         </Header>
@@ -55,4 +54,4 @@ const Task = (props: Props) => {
   );
 };
 
-export default Task;
+export default Card;

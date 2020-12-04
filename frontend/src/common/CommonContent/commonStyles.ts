@@ -33,7 +33,7 @@ export const Container = styled.div`
   padding-top: ${px(15)};
 `;
 
-export const TaskWrapper = styled.div<{ height: number }>`
+export const Wrapper = styled.div<{ height: number }>`
   display: flex;
   flex-direction: column;
   margin-top: ${px(15)};

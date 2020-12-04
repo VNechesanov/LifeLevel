@@ -1,6 +1,7 @@
 import { keyframes } from "styled-components";
 
 const REM_RATIO: number = 0.0625;
+export const DELTA = 360;
 
 export const fadeOutAnimation = keyframes`
   from {
